@@ -31,7 +31,7 @@ li {
   align-items: center;
 }
 
-.create-page {
+.create-page, .edit-page {
   margin-top: 2rem;
   width: 50%;
   border-radius: 10px;
