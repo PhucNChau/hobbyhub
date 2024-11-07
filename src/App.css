@@ -17,11 +17,35 @@ li {
 }
 
 .navbar {
-  width: 100%;
+  width: 80%;
   position: sticky;
   top: 0;
   background-color: #00cc99;
-  /* height: 100vh; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.2rem 10%;
+}
+
+.navbar h3 {
+  color: white;
+  margin: 0.6rem 0rem;
+}
+
+.navbar input {
+  border: none;
+  padding: .5rem .8rem;
+  width: 30%;
+  border-radius: 5px;
+}
+
+.navbar nav {
+  font-size: 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  font-weight: 500;
 }
 
 .outlet-container {

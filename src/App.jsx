@@ -7,6 +7,8 @@ const App = () => {
   return (
     <div className="app">
       <div className="navbar">
+        <h3>ScienceHub</h3>
+        <input type="text" placeholder="Search" />
         <nav>
           <Link to="/">Home</Link>
           <Link to="/create">Create New Post</Link>
