@@ -114,6 +114,7 @@ form textarea {
   margin: 0px 4px;
   padding: 1px 10px;
   color: white;
+  cursor: pointer;
 }
 .sort-container span.selected {
   background-color: #00926d;
@@ -136,4 +137,8 @@ form textarea {
   font-size: 1.2rem;
   font-weight: 700;
   margin: .8rem 0rem;
+}
+
+.post-container .time, .post-container .upvote {
+  color: #4a4a4a;
 }

@@ -22,12 +22,43 @@ const HomePage = () => {
     setSortBy('date');
   };
 
+  const sortPostsByDate = () => {
+    let temp = posts.sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at));
+    setPosts(temp);
+    setSortBy('date');
+  };
+
+  const sortPostsByVote = () => {
+    let temp = posts.sort((a, b) => parseInt(b.upvotes) - parseInt(a.upvotes));
+    setPosts(temp);
+    setSortBy('vote');
+  };
+
+  const formatTime = (time) => {
+    let postedTime = (Date.now() - Date.parse(time))/1000;
+
+    if (postedTime <= 60)
+      return `${Math.floor(postedTime)} seconds`;
+    if (postedTime <= 60*60)
+      return `${Math.floor(postedTime/60)} minutes`;
+    if (postedTime <= 60*60*24)
+      return `${Math.floor(postedTime/(60*60))} hours`;
+    if (postedTime <= 60*60*24*7)
+      return `${Math.floor(postedTime/(60*60*24))} days`;
+    if (postedTime <= 60*60*24*30)
+      return `${Math.floor(postedTime/(60*60*24*7))} weeks`;
+    if (postedTime <= 60*60*24*7*52)
+      return `${Math.floor(postedTime/(60*60*24*30))} months`;
+    if (postedTime > 60*60*24*7*52)
+      return `${Math.floor(postedTime/(60*60*24*7*52))} years`;
+  }
+
   return (
     <div className="home-page">
       <div className="sort-container">
         Order by:
-        <span className={sortBy == 'date' ? 'selected' : ''}>Newest</span>
-        <span className={sortBy == 'vote' ? 'selected' : ''}>Most Popular</span>
+        <span onClick={sortPostsByDate} className={sortBy == 'date' ? 'selected' : ''}>Newest</span>
+        <span onClick={sortPostsByVote} className={sortBy == 'vote' ? 'selected' : ''}>Most Popular</span>
       </div>
       {posts && posts.length > 0 ?
         <div>
@@ -35,7 +66,7 @@ const HomePage = () => {
             <Post
               key={item.id}
               id={item.id}
-              time={item.created_at}
+              time={formatTime(item.created_at)}
               title={item.title}
               upvotes={item.upvotes}
             />
