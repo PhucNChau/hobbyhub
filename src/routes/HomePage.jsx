@@ -51,7 +51,7 @@ const HomePage = () => {
       return `${Math.floor(postedTime/(60*60*24*30))} months`;
     if (postedTime > 60*60*24*7*52)
       return `${Math.floor(postedTime/(60*60*24*7*52))} years`;
-  }
+  };
 
   return (
     <div className="home-page">

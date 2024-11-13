@@ -4,7 +4,7 @@
 }
 
 li {
-  list-style: none;
+  /* list-style: none; */
   text-align: left;
 }
 
@@ -133,12 +133,100 @@ form textarea {
   align-items: flex-start;
 }
 
-.post-container .title {
+.post-container .title, .detail-container .title {
   font-size: 1.2rem;
   font-weight: 700;
   margin: .8rem 0rem;
 }
 
 .post-container .time, .post-container .upvote {
-  color: #4a4a4a;
+  color: #5e5e5e;
+}
+
+.detail-page {
+  width: 100%;
+  margin: 1.5rem 0rem;
+  background-color: white;
+  border-radius: 5px;
+  padding: 1.5rem;
+}
+
+.detail-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  text-align: start;
+}
+
+.detail-container .time, .detail-container .upvote, .detail-container .content {
+  color: #5e5e5e;
+}
+
+.post-img {
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+  width: 250px;
+}
+
+.edit-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.upvote span:first-child {
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.action {
+  display: flex;
+  flex-direction: row;
+}
+.action span:first-child {
+  margin-right: 8px;
+}
+.action span {
+  cursor: pointer;
+  background-color: rgb(241, 241, 241);
+  border-radius: 20px;
+  padding: 1px 5px;
+}
+
+.comment-section {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background-color: rgb(241, 241, 241);
+  border-radius: 5px;
+  margin-top: .8rem;
+  padding: 1rem .8rem;
+}
+
+.comment-section input {
+  border: none;
+  padding: .5rem;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.send-comment {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.comment-section button {
+  font-size: 14px;
+  padding: .4rem .8rem;
+}
+
+.comment-section ul {
+  margin-top: 0;
+  padding-left: 1rem;
+}
+.comment-section li {
+  list-style-type: "\2010\2002";
 }
