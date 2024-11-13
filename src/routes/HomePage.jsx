@@ -1,16 +1,23 @@
 import { useEffect, useState } from "react";
 import Post from "../components/Post";
 import { supabase } from '../client';
+import { useOutletContext } from "react-router-dom";
 
 
 const HomePage = () => {
-
+  const [searchInput, setSearchInput] = useOutletContext();
   const [posts, setPosts] = useState([]);
+  const [filteredPosts, setFilteredPosts] = useState([]);
   const [sortBy, setSortBy] = useState('');
 
   useEffect(() => {
+    setSearchInput("");
     fetchPosts().catch(console.error);
   }, []);
+
+  useEffect(() => {
+    searchPosts();
+  }, [searchInput]);
 
   const fetchPosts = async () => {
     const {data} = await supabase
@@ -19,17 +26,32 @@ const HomePage = () => {
       .order('created_at', { ascending: false });
 
     setPosts(data);
+    setFilteredPosts(data);
     setSortBy('date');
   };
 
+  const searchPosts = () => {
+    if (searchInput !== "") {
+      const filteredResults = posts.filter((item) =>
+        item.title.toLowerCase().includes(searchInput.toLowerCase())
+      );
+
+      setFilteredPosts(filteredResults);
+    } else {
+      if (posts && posts.length > 0) {
+        setFilteredPosts(posts);
+      }
+    }
+  };
+
   const sortPostsByDate = () => {
-    let temp = posts.sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at));
+    let temp = filteredPosts.sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at));
     setPosts(temp);
     setSortBy('date');
   };
 
   const sortPostsByVote = () => {
-    let temp = posts.sort((a, b) => parseInt(b.upvotes) - parseInt(a.upvotes));
+    let temp = filteredPosts.sort((a, b) => parseInt(b.upvotes) - parseInt(a.upvotes));
     setPosts(temp);
     setSortBy('vote');
   };
@@ -60,9 +82,9 @@ const HomePage = () => {
         <span onClick={sortPostsByDate} className={sortBy == 'date' ? 'selected' : ''}>Newest</span>
         <span onClick={sortPostsByVote} className={sortBy == 'vote' ? 'selected' : ''}>Most Popular</span>
       </div>
-      {posts && posts.length > 0 ?
+      {filteredPosts && filteredPosts.length > 0 ?
         <div>
-          {posts.map((item) => (
+          {filteredPosts.map((item) => (
             <Post
               key={item.id}
               id={item.id}
